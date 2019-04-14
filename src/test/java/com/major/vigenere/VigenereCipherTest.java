@@ -12,6 +12,8 @@ public class VigenereCipherTest {
         VigenereCipher cipher = new VigenereCipher("KEY");
         assertNotNull(cipher);
     }
+
+    // encrypt
     
     @Test
     public void encrypt_emptyPlainText_cipherTextIsEmpty() {
@@ -53,6 +55,16 @@ public class VigenereCipherTest {
         VigenereCipher cipher = new VigenereCipher("SECRET");
         String cipherText = cipher.encrypt("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
         assertEquals("LLGHYBUODISPFJQONNETUFZXJXJVPTRCFFK", cipherText);
+    }
+
+
+    // decrypt
+
+    @Test
+    public void decrypt_emptyPlainText_cipherTextIsEmpty() {
+        VigenereCipher cipher = new VigenereCipher("SECRET");
+        String plainText = cipher.decrypt("");
+        assertEquals("", plainText);
     }
 
 }

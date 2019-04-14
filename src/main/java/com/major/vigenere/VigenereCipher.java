@@ -29,6 +29,10 @@ public class VigenereCipher {
         return String.valueOf(cipher);
     }
 
+    public String decrypt(String cipherText) {
+        return "";
+    }
+
     private char[] sanitize(String plainText) {
         char[] plain = plainText.toUpperCase().toCharArray();
         char[] sanitized = new char[plain.length];
