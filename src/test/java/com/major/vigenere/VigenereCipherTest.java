@@ -38,7 +38,7 @@ public class VigenereCipherTest {
     public void encrypt_keyIsLetterBC_plainTextIsShiftedByOneAndTwoCharsInSuccession() {
         VigenereCipher cipher = new VigenereCipher("BC");
         String cipherText = cipher.encrypt("LEMON");
-        assertEquals("MGNQO ", cipherText);
+        assertEquals("MGNQO", cipherText);
     }
 
 }
