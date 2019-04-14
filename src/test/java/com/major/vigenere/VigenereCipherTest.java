@@ -28,17 +28,24 @@ public class VigenereCipherTest {
     }
 
     @Test
-    public void encrypt_keyIsLetterC_plainTextIsShiftedByTwoChars() {
-        VigenereCipher cipher = new VigenereCipher("C");
-        String cipherText = cipher.encrypt("LEMON");
-        assertEquals("NGOQP", cipherText);
-    }
-
-    @Test
     public void encrypt_keyIsLetterBC_plainTextIsShiftedByOneAndTwoCharsInSuccession() {
         VigenereCipher cipher = new VigenereCipher("BC");
         String cipherText = cipher.encrypt("LEMON");
         assertEquals("MGNQO", cipherText);
+    }
+
+    @Test
+    public void encrypt_plainTextWithCharsOutsideOfAlphabet_skipsThoseChars() {
+        VigenereCipher cipher = new VigenereCipher("BC");
+        String cipherText = cipher.encrypt("-LEM ON!-");
+        assertEquals("MGNQO", cipherText);
+    }
+
+    @Test
+    public void encrypt_genericText() {
+        VigenereCipher cipher = new VigenereCipher("SECRET");
+        String cipherText = cipher.encrypt("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
+        assertEquals("LLGHYBUODISPFJQONNETUFZXJXJVPTRCFFK", cipherText);
     }
 
 }

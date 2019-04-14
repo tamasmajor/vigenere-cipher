@@ -1,5 +1,6 @@
 package com.major.vigenere;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class VigenereCipher {
     }
 
     public String encrypt(String plainText) {
-        char[] plain = plainText.toCharArray();
+        char[] plain = sanitize(plainText);
         char[] cipher = new char[plain.length];
         for (int i = 0; i < plain.length; i++) {
             char currentKeyChar = key.charAt(i % key.length());
@@ -28,6 +29,19 @@ public class VigenereCipher {
         return String.valueOf(cipher);
     }
 
+    private char[] sanitize(String plainText) {
+        char[] plain = plainText.toCharArray();
+        char[] sanitized = new char[plain.length];
+        int numOfValid = 0;
+        for (int i = 0; i < plain.length; i++) {
+            if (indexByAlphabetElement.containsKey(plain[i])) {
+                sanitized[numOfValid] = plain[i];
+                numOfValid++;
+            }
+        }
+        return Arrays.copyOf(sanitized, numOfValid);
+    }
+
     private Map<Character, Integer> constructIndexByAlphabet() {
         Map<Character, Integer> indices = new HashMap<>();
         for (int idx = 0; idx < ALPHABET.length(); idx++) {
@@ -35,7 +49,6 @@ public class VigenereCipher {
         }
         return indices;
     }
-
 
     private char[][] constructVigenereTable() {
         int len = ALPHABET.length();
