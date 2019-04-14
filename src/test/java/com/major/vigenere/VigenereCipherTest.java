@@ -27,4 +27,11 @@ public class VigenereCipherTest {
         assertEquals("LEMON", cipherText);
     }
 
+    @Test
+    public void encrypt_keyIsLetterC_plainTextIsShiftedByTwoChars() {
+        VigenereCipher cipher = new VigenereCipher("C");
+        String cipherText = cipher.encrypt("LEMON");
+        assertEquals("NGOQP", cipherText);
+    }
+
 }
