@@ -7,12 +7,12 @@ public class VigenereCipher {
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final String key;
 
-    private final Map<Character, Integer> indexByLetter;
+    private final Map<Character, Integer> indexByAlphabetElement;
     private final char[][] vigenereTable;
 
     public VigenereCipher(String key) {
         this.key = key;
-        this.indexByLetter = calculateLetterIndices();
+        this.indexByAlphabetElement = constructIndexByAlphabet();
         this.vigenereTable = constructVigenereTable();
     }
 
@@ -20,15 +20,15 @@ public class VigenereCipher {
         char[] plain = plainText.toCharArray();
         char[] cipher = new char[plain.length];
         for (int i = 0; i < plain.length; i++) {
-            char currentKeyLetter = key.charAt(i % key.length());
-            int currentIdx = indexByLetter.get(plain[i]);
-            int currentKeyIdx = indexByLetter.get(currentKeyLetter);
-            cipher[i] = vigenereTable[currentIdx][currentKeyIdx];
+            char currentKeyChar = key.charAt(i % key.length());
+            int alphabetIdxForCurrentPlainItem = indexByAlphabetElement.get(plain[i]);
+            int alphabetIdxForCurrentKeyItem = indexByAlphabetElement.get(currentKeyChar);
+            cipher[i] = vigenereTable[alphabetIdxForCurrentPlainItem][alphabetIdxForCurrentKeyItem];
         }
         return String.valueOf(cipher);
     }
 
-    private Map<Character, Integer> calculateLetterIndices() {
+    private Map<Character, Integer> constructIndexByAlphabet() {
         Map<Character, Integer> indices = new HashMap<>();
         for (int idx = 0; idx < ALPHABET.length(); idx++) {
             indices.put(ALPHABET.charAt(idx), idx);
