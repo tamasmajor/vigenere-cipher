@@ -42,6 +42,13 @@ public class VigenereCipherTest {
     }
 
     @Test
+    public void encrypt_plainTextWithLowerCaseLetter_cipherIsCaseInsensitive() {
+        VigenereCipher cipher = new VigenereCipher("BC");
+        String cipherText = cipher.encrypt("leMon");
+        assertEquals(cipher.encrypt("LEMON"), cipherText);
+    }
+
+    @Test
     public void encrypt_genericText() {
         VigenereCipher cipher = new VigenereCipher("SECRET");
         String cipherText = cipher.encrypt("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");

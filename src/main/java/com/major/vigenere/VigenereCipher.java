@@ -30,7 +30,7 @@ public class VigenereCipher {
     }
 
     private char[] sanitize(String plainText) {
-        char[] plain = plainText.toCharArray();
+        char[] plain = plainText.toUpperCase().toCharArray();
         char[] sanitized = new char[plain.length];
         int numOfValid = 0;
         for (int i = 0; i < plain.length; i++) {
