@@ -8,6 +8,6 @@ public class VigenereCipher {
     }
 
     public String encrypt(String plainText) {
-        return "";
+        return plainText;
     }
 }

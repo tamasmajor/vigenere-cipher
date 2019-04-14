@@ -19,5 +19,12 @@ public class VigenereCipherTest {
         String cipherText = cipher.encrypt("");
         assertEquals("", cipherText);
     }
+    
+    @Test
+    public void encrypt_keyIsLetterA_cipherTextEqualsPlainText() {
+        VigenereCipher cipher = new VigenereCipher("A");
+        String cipherText = cipher.encrypt("LEMON");
+        assertEquals("LEMON", cipherText);
+    }
 
 }
