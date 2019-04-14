@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 public class VigenereCipherTest {
 
@@ -18,7 +17,7 @@ public class VigenereCipherTest {
     public void encrypt_emptyPlainText_cipherTextIsEmpty() {
         VigenereCipher cipher = new VigenereCipher("SECRET");
         String cipherText = cipher.encrypt("");
-        assertEquals("", cipher);
+        assertEquals("", cipherText);
     }
 
 }

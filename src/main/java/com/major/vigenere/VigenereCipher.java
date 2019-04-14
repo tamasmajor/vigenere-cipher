@@ -6,4 +6,8 @@ public class VigenereCipher {
     public VigenereCipher(String key) {
         this.key = key;
     }
+
+    public String encrypt(String plainText) {
+        return "";
+    }
 }
