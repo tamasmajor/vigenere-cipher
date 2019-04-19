@@ -1,4 +1,4 @@
-package com.major.vigenere.exception;
+package com.major.vigenere;
 
 public class CipherKey {
     private final String key;

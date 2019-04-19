@@ -1,5 +1,6 @@
-package com.major.vigenere.exception;
+package com.major.vigenere;
 
+import com.major.vigenere.CipherKey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
