@@ -18,7 +18,7 @@ public class VigenereCipher {
     private VigenereCipher(String key, char[] alphabet) {
         this.alphabet = alphabet;
         this.cipherKey = new CipherKey(key, alphabet);
-        this.alphabetPositionByLetter = constructIndexByAlphabet();
+        this.alphabetPositionByLetter = constructLetterPositionInAlphabetMapping();
     }
 
     public String encrypt(String plainText) {
@@ -57,6 +57,11 @@ public class VigenereCipher {
         }
     }
 
+    /**
+     * Removes the characters from the plain text which are not part of the alphabet
+     * @param  plainText the original, plain text
+     * @return           the plain text as uppercase and without the letters outside of the alphabet
+     */
     private char[] sanitize(String plainText) {
         char[] plain = plainText.toUpperCase().toCharArray();
         char[] sanitized = new char[plain.length];
@@ -70,7 +75,7 @@ public class VigenereCipher {
         return Arrays.copyOf(sanitized, numOfValid);
     }
 
-    private Map<Character, Integer> constructIndexByAlphabet() {
+    private Map<Character, Integer> constructLetterPositionInAlphabetMapping() {
         Map<Character, Integer> indices = new HashMap<>();
         for (int idx = 0; idx < alphabet.length; idx++) {
             indices.put(alphabet[idx], idx);
