@@ -1,6 +1,6 @@
 package com.major.vigenere;
 
-public class CipherKey {
+class CipherKey {
     private final String key;
     private final int[] shifting;
 

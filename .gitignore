@@ -26,3 +26,6 @@ hs_err_pid*
 # Intellij
 .idea
 *.iml
+
+# Tasks, ideas - stored locally only
+ideas.txt
