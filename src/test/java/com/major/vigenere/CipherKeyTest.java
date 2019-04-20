@@ -1,11 +1,11 @@
 package com.major.vigenere;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("CipherKey")
 class CipherKeyTest {
@@ -22,7 +22,7 @@ class CipherKeyTest {
 
         @Test
         public void keyContainsLetterOutsideOfAlphabet_throwsException() {
-            Assertions.assertThrows(IllegalArgumentException.class, () -> new CipherKey("KEY", new char[] { 'K', 'E' }));
+            assertThrows(IllegalArgumentException.class, () -> new CipherKey("KEY", new char[] { 'K', 'E' }));
         }
     }
 

@@ -4,8 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VigenereCipherTest {
 
@@ -71,6 +70,33 @@ public class VigenereCipherTest {
             VigenereCipher cipher = new VigenereCipher("SECRET");
             String plainText = cipher.decrypt("");
             assertEquals("", plainText);
+        }
+
+        @Test
+        public void decrypt_keyIsLetterA_cipherTextEqualsPlainText() {
+            VigenereCipher cipher = new VigenereCipher("A");
+            String plainText = cipher.decrypt("LEMON");
+            assertEquals("LEMON", plainText);
+        }
+
+        @Test
+        public void decrypt_cipherTextContainLowerCaseLetter_decryptsAsUppercase() {
+            VigenereCipher cipher = new VigenereCipher("BC");
+            String plainText = cipher.decrypt("leMon");
+            assertEquals(cipher.decrypt("LEMON"), plainText);
+        }
+
+        @Test
+        public void decrypt_cipherTextContainsLettersOutsideAlphabet_throwsException() {
+            VigenereCipher cipher = new VigenereCipher("SECRET");
+            assertThrows(IllegalArgumentException.class, () -> cipher.decrypt("ILL.EGAL"));
+        }
+
+        @Test
+        public void decrypt_generalText() {
+            VigenereCipher cipher = new VigenereCipher("SEC");
+            String plainText = cipher.decrypt("LLGIYKUODJSYFJQPNWETUGZGJXJWPCRCFGK");
+            assertEquals("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG", plainText);
         }
     }
 

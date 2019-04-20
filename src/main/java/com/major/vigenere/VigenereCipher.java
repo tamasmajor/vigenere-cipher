@@ -31,7 +31,12 @@ public class VigenereCipher {
     }
 
     public String decrypt(String cipherText) {
-        return "";
+        char[] cipher = cipherText.toUpperCase().toCharArray();
+        char[] plain = new char[cipher.length];
+        for (int i = 0; i < cipher.length; i++) {
+            plain[i] = decryptLetter(cipher[i], i);
+        }
+        return String.valueOf(plain);
     }
 
     private char encryptLetter(char plainLetter, int overallPosition) {
@@ -39,6 +44,17 @@ public class VigenereCipher {
         int shifting = cipherKey.shiftingAtPosition(overallPosition);
         int shiftedPosition = (plainLetterAlphabetIndex + shifting) % alphabet.length;
         return alphabet[shiftedPosition];
+    }
+
+    private char decryptLetter(char cipherLetter, int overallPosition) {
+        if (alphabetPositionByLetter.containsKey(cipherLetter)) {
+            int cipherLetterAlphabetIndex = alphabetPositionByLetter.get(cipherLetter);
+            int shifting = cipherKey.shiftingAtPosition(overallPosition);
+            int shiftedPosition = Math.floorMod(cipherLetterAlphabetIndex - shifting, alphabet.length);
+            return alphabet[shiftedPosition];
+        } else {
+            throw new IllegalArgumentException("Ciphertext should contain letters only from the alphabet");
+        }
     }
 
     private char[] sanitize(String plainText) {
