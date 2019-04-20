@@ -6,16 +6,21 @@ import java.util.Map;
 
 public class VigenereCipher {
     private static final String DEFAULT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private final char[] alphabet;
-    private final String key;
 
+    private final char[] alphabet;
+    private final CipherKey cipherKey;
     private final Map<Character, Integer> alphabetPositionByLetter;
 
     public VigenereCipher(String key) {
-        this.key = key;
-        this.alphabet = DEFAULT_ALPHABET.toCharArray(); // TODO: Make it customisable via the constructor
+        this(key, DEFAULT_ALPHABET.toCharArray()); // TODO: Make it possible to provide custom alphabet
+    }
+
+    private VigenereCipher(String key, char[] alphabet) {
+        this.alphabet = alphabet;
+        this.cipherKey = new CipherKey(key, alphabet);
         this.alphabetPositionByLetter = constructIndexByAlphabet();
     }
+
     public String encrypt(String plainText) {
         char[] plain = sanitize(plainText);
         char[] cipher = new char[plain.length];
@@ -29,11 +34,10 @@ public class VigenereCipher {
         return "";
     }
 
-    private char encryptLetter(char plain, int overallPosition) {
-        int alphabetIndexForPlain = alphabetPositionByLetter.get(plain);
-        int keyPosition = overallPosition % key.length();
-        int alphabetIndexForKey = alphabetPositionByLetter.get(key.charAt(keyPosition));
-        int shiftedPosition = (alphabetIndexForPlain + alphabetIndexForKey) % alphabet.length;
+    private char encryptLetter(char plainLetter, int overallPosition) {
+        int plainLetterAlphabetIndex = alphabetPositionByLetter.get(plainLetter);
+        int shifting = cipherKey.shiftingAtPosition(overallPosition);
+        int shiftedPosition = (plainLetterAlphabetIndex + shifting) % alphabet.length;
         return alphabet[shiftedPosition];
     }
 
