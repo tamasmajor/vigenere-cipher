@@ -100,4 +100,21 @@ public class VigenereCipherTest {
         }
     }
 
+    @Nested
+    @DisplayName("canHandle")
+    class CanHandle {
+
+        private final VigenereCipher cipher = new VigenereCipher("SECRET");
+
+        @Test
+        public void canHandle_charIsPartOfAlphabet_cipherCanHandle() {
+            assertTrue(cipher.canHandle('A'));
+        }
+
+        @Test
+        public void canHandle_charIsOutsideOfAlphabet_cipherCannotHandle() {
+            assertFalse(cipher.canHandle('Á'));
+        }
+    }
+
 }

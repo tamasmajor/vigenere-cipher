@@ -57,6 +57,10 @@ public class VigenereCipher {
         }
     }
 
+    public boolean canHandle(char c) {
+        return alphabetPositionByLetter.containsKey(c);
+    }
+
     /**
      * Removes the characters from the plain text which are not part of the alphabet
      * @param  plainText the original, plain text
